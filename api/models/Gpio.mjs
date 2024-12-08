@@ -12,6 +12,11 @@ const Gpio = sequelize.define(
     pinNumber: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+    },
+    dataPin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     s_id: {
       type: DataTypes.STRING, // Matches the s_id in OfflineSensor
