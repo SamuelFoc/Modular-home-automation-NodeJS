@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/index.mjs";
 import OnlineSensor from "./OnlineSensor.mjs";
+import OfflineSensor from "./OfflineSensor.mjs";
 
 const SensoricData = sequelize.define(
   "SensoricData",
@@ -37,6 +38,12 @@ SensoricData.addHook("afterCreate", async (sensoricData, options) => {
   if (online_sensor) {
     online_sensor.last_data = sensoricData.data;
     await online_sensor.save();
+  }
+
+  const offline_sensor = await OfflineSensor.findByPk(sensoricData.s_id);
+  if (offline_sensor) {
+    offline_sensor.last_data = sensoricData.data;
+    await offline_sensor.save();
   }
 });
 
