@@ -1,5 +1,5 @@
 import express from "express";
-import sensoricApiRoutes from "./routes/sensoricApiRoutes.mjs";
+import sensoricApiRoutes from "./routes/sensoricApi.routes.mjs";
 
 // Sensoric data collecting API
 const s_app = express();
