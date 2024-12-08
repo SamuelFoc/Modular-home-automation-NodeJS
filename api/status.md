@@ -1,8 +1,7 @@
 # System Status
 
-Current system is capable of receiving the data from sensors of types mentioned below. Currently there is no action based on the data received from the sensors. The data are only displayed on the FE (sort of meteo station).
+Current system is capable of receiving the data from online sensors through the sensoric API. Currently there is no action based on the data received from the sensors. The data are only displayed on the FE (sort of meteo station). You can also create offline sensors, assign a GPIO pin to them and read their value.
 
-### Supported Sensors
+### TODO
 
-- Wi-fi
-  - DHT Family
+- Read offline sensors
