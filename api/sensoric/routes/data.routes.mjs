@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { recordSensoricData } from "../controllers/sensoric.controller.mjs";
+import { recordSensoricData } from "../controllers/data.controller.mjs";
 
 const router = Router();
 
