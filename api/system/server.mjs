@@ -1,5 +1,7 @@
 import express from "express";
-import onlineSensorRoutes from "./routes/onlineSensorRoutes.mjs";
+import onlineSensorRoutes from "./routes/onlineSensor.routes.mjs";
+import offlineSensorRoutes from "./routes/offlineSensor.routes.mjs";
+import gpioRoutes from "./routes/gpio.routes.mjs";
 
 // Sensoric data collecting API
 const app = express();
@@ -9,6 +11,8 @@ app.use(express.json());
 
 // Sensoric API routes
 app.use("/api/online_sensors", onlineSensorRoutes);
+app.use("/api/offline_sensors", offlineSensorRoutes);
+app.use("/api/gpios", gpioRoutes);
 
 // Run Sensoric API
 const startAPI = () => {
