@@ -1,4 +1,4 @@
-import Sensor from "../../models/Sensor.mjs";
+import OnlineSensor from "../../models/OnlineSensor.mjs";
 import SensoricData from "../../models/SensoricData.mjs";
 
 export const recordSensoricData = async (req, res) => {
@@ -7,7 +7,7 @@ export const recordSensoricData = async (req, res) => {
 
   try {
     // Find the sensor by its s_id
-    const sensor = await Sensor.findOne({ where: { s_id: sID } });
+    const sensor = await OnlineSensor.findOne({ where: { s_id: sID } });
 
     if (!sensor) {
       // Return 404 if the sensor is not found

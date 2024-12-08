@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/index.mjs";
 
-const Sensor = sequelize.define(
-  "Sensor",
+const OnlineSensor = sequelize.define(
+  "OnlineSensor",
   {
     s_id: {
       type: DataTypes.STRING,
@@ -28,9 +28,9 @@ const Sensor = sequelize.define(
     },
   },
   {
-    tableName: "sensors",
+    tableName: "online_sensors",
     timestamps: true,
   }
 );
 
-export default Sensor;
+export default OnlineSensor;

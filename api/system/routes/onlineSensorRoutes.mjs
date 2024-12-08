@@ -5,7 +5,7 @@ import {
   getAllSensors,
   getSensorById,
   updateSensor,
-} from "../controllers/sensorController.mjs";
+} from "../controllers/onlineSensorController.mjs";
 
 const router = Router();
 

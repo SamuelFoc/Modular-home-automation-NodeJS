@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/index.mjs";
-import Sensor from "./Sensor.mjs";
+import OnlineSensor from "./OnlineSensor.mjs";
 
 const SensoricData = sequelize.define(
   "SensoricData",
@@ -14,7 +14,7 @@ const SensoricData = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       references: {
-        model: "sensors", // References the "sensors" table
+        model: "online_sensors", // References the "sensors" table
         key: "s_id",
       },
       onUpdate: "CASCADE",
@@ -33,10 +33,10 @@ const SensoricData = sequelize.define(
 
 // Hook to update the last_data attribute of the Sensor model
 SensoricData.addHook("afterCreate", async (sensoricData, options) => {
-  const sensor = await Sensor.findByPk(sensoricData.s_id);
-  if (sensor) {
-    sensor.last_data = sensoricData.data;
-    await sensor.save();
+  const online_sensor = await OnlineSensor.findByPk(sensoricData.s_id);
+  if (online_sensor) {
+    online_sensor.last_data = sensoricData.data;
+    await online_sensor.save();
   }
 });
 
