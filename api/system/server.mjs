@@ -10,9 +10,9 @@ const app = express();
 app.use(express.json());
 
 // Sensoric API routes
-app.use("/api/online_sensors", onlineSensorRoutes);
-app.use("/api/offline_sensors", offlineSensorRoutes);
-app.use("/api/gpios", gpioRoutes);
+app.use("/api/system/online_sensors", onlineSensorRoutes);
+app.use("/api/system/offline_sensors", offlineSensorRoutes);
+app.use("/api/system/gpios", gpioRoutes);
 
 // Run Sensoric API
 const startAPI = () => {
