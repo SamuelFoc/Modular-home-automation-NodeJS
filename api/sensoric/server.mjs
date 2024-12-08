@@ -1,5 +1,6 @@
 import express from "express";
-import sensoricApiRoutes from "./routes/sensoricApi.routes.mjs";
+import dataRoutes from "./routes/data.routes.mjs";
+import offlineSensorRoutes from "./routes/offlineSensor.routes.mjs";
 
 // Sensoric data collecting API
 const s_app = express();
@@ -8,7 +9,8 @@ const s_app = express();
 s_app.use(express.json());
 
 // Sensoric API routes
-s_app.use("/api/sensoric", sensoricApiRoutes);
+s_app.use("/api/sensoric/data", dataRoutes);
+s_app.use("/api/sensoric/read", offlineSensorRoutes);
 
 // Run Sensoric API
 const startSensoricAPI = () => {
