@@ -1,9 +1,16 @@
-import defineSensorAssociations from "./Sensor/SensorAssociator.mjs";
+import Sensor from "./Sensor.mjs";
 import SensoricData from "./SensoricData.mjs";
-import DHTFamilySensor from "./Sensor/DHTFamilySensor.mjs";
 
-// Define associations for all models
-defineSensorAssociations(DHTFamilySensor, SensoricData); // For specific child model
+// Define associations
+Sensor.hasMany(SensoricData, {
+  foreignKey: "s_id",
+  as: "data",
+});
+
+SensoricData.belongsTo(Sensor, {
+  foreignKey: "s_id",
+  as: "sensor",
+});
 
 // Export models with associations
-export { AbstractSensor, TemperatureSensor, MotionSensor, SensoricData };
+export { Sensor, SensoricData };
