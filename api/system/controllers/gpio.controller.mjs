@@ -4,8 +4,8 @@ import OfflineSensor from "../../models/OfflineSensor.mjs";
 // Create a new GPIO
 export const createGpio = async (req, res) => {
   try {
-    const { pinNumber, s_id } = req.body;
-    const gpio = await Gpio.create({ pinNumber, s_id: s_id || null });
+    const { pinNumber, dataPin, s_id } = req.body;
+    const gpio = await Gpio.create({ pinNumber, s_id: s_id || null, dataPin });
     res.status(201).json(gpio);
   } catch (error) {
     res.status(400).json({ error: error.message });
