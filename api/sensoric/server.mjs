@@ -8,7 +8,7 @@ const s_app = express();
 s_app.use(express.json());
 
 // Sensoric API routes
-s_app.use("/sensoric_api", sensoricApiRoutes);
+s_app.use("/api/sensoric", sensoricApiRoutes);
 
 // Run Sensoric API
 const startSensoricAPI = () => {
