@@ -1,4 +1,5 @@
-import OfflineSensor from "../../models/OfflineSensor.mjs";
+import { Gpio } from "../../models/associations.mjs";
+import { OfflineSensor } from "../../models/associations.mjs";
 
 // Create a new OfflineSensor
 export const createOfflineSensor = async (req, res) => {
@@ -20,7 +21,14 @@ export const createOfflineSensor = async (req, res) => {
 // Get all OfflineSensors
 export const getAllOfflineSensors = async (req, res) => {
   try {
-    const offlineSensors = await OfflineSensor.findAll();
+    const offlineSensors = await OfflineSensor.findAll({
+      include: [
+        {
+          model: Gpio,
+          as: "gpios",
+        },
+      ],
+    });
     res.status(200).json(offlineSensors);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -30,7 +38,14 @@ export const getAllOfflineSensors = async (req, res) => {
 // Get a single OfflineSensor by s_id
 export const getOfflineSensorById = async (req, res) => {
   try {
-    const offlineSensor = await OfflineSensor.findByPk(req.params.s_id);
+    const offlineSensor = await OfflineSensor.findByPk(req.params.s_id, {
+      include: [
+        {
+          model: Gpio,
+          as: "gpios",
+        },
+      ],
+    });
     if (!offlineSensor) {
       return res.status(404).json({ error: "OfflineSensor not found" });
     }
@@ -44,7 +59,14 @@ export const getOfflineSensorById = async (req, res) => {
 export const updateOfflineSensor = async (req, res) => {
   try {
     const { name, description, attributes, last_data } = req.body;
-    const offlineSensor = await OfflineSensor.findByPk(req.params.s_id);
+    const offlineSensor = await OfflineSensor.findByPk(req.params.s_id, {
+      include: [
+        {
+          model: Gpio,
+          as: "gpios",
+        },
+      ],
+    });
     if (!offlineSensor) {
       return res.status(404).json({ error: "OfflineSensor not found" });
     }

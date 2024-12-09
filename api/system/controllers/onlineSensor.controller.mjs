@@ -1,4 +1,4 @@
-import OnlineSensor from "../../models/OnlineSensor.mjs";
+import { OnlineSensor } from "../../models/associations.mjs";
 
 // Create a new sensor
 export const createSensor = async (req, res) => {
