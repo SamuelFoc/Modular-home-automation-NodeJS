@@ -10,11 +10,19 @@ const Gpio = sequelize.define(
       primaryKey: true,
     },
     pinNumber: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
     },
     dataPin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    powerPin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    state: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
@@ -32,6 +40,16 @@ const Gpio = sequelize.define(
   {
     tableName: "gpios",
     timestamps: true,
+    validate: {
+      // Custom validator to ensure dataPin and powerPin are not both true
+      cannotHaveBothDataAndPowerPins() {
+        if (this.dataPin && this.powerPin) {
+          throw new Error(
+            "A GPIO cannot have both dataPin and powerPin set to true."
+          );
+        }
+      },
+    },
   }
 );
 
