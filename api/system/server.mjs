@@ -1,10 +1,14 @@
 import express from "express";
+import cors from "cors";
 import onlineSensorRoutes from "./routes/onlineSensor.routes.mjs";
 import offlineSensorRoutes from "./routes/offlineSensor.routes.mjs";
 import gpioRoutes from "./routes/gpio.routes.mjs";
 
 // Sensoric data collecting API
 const app = express();
+
+// Enable CORS
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
