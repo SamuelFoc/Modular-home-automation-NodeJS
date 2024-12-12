@@ -3,7 +3,7 @@ version: "3.8"
 services:
   db:
     image: postgres
-    container_name: sensoric_db
+    container_name: db
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -13,6 +13,39 @@ services:
       - "5432:5432"
     volumes:
       - sensoric_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        SENSORIC_API_PORT: ${S_PORT}
+        SYSTEM_API_PORT: ${PORT}
+    container_name: api
+    restart: always
+    environment:
+      DB_HOST: ${POSTGRES_HOST}
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      S_PORT: ${S_PORT}
+      PORT: ${PORT}
+    ports:
+      - "${S_PORT}:${S_PORT}" # Map port for Sensoric API
+      - "${PORT}:${PORT}" # Map port for System API
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   sensoric_data:
+
+networks:
+  default:
+    name: sensoric_network
