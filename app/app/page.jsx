@@ -1,7 +1,10 @@
+import OnlineSensors from "@/components/func/OnlineSensors/OnlineSensors";
+import ContentPage from "@/components/ui/ContentPage";
+
 export default function Home() {
   return (
-    <div className="bg-green-300">
-      <h1>Home Page</h1>
-    </div>
+    <ContentPage>
+      <OnlineSensors title="Online Sensors" />
+    </ContentPage>
   );
 }
