@@ -6,6 +6,7 @@ body {
   background-image: url("/cubes.png"),
     linear-gradient(to bottom right, #151515, #132a3f, #060607);
   background-repeat: repeat;
+  color: white;
 }
 
 @layer base {
